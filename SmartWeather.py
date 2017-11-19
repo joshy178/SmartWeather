@@ -23,7 +23,10 @@ while(True):
     currentDate = root.child(now.strftime('%Y-%m-%d'))
     temps = currentDate.child('temps')
     humiditys = currentDate.child('humidity')
-
+    url = currentDate.child('imgURL')
+    checkURL = url.get(etag = False)
+    if(checkURL == None):
+        currentDate.update({'imgURL': 'nothing'})
     s.trigger()	 # reads in new temp and humidity
     sleep(.5)	 # the trigger() call needs time before values are taken from 's'
     humidity = s.humidity()
